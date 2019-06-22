@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.jakewharton.rxbinding3.view.RxView;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
@@ -137,6 +138,7 @@ public class Frp4TalkActivity extends AppCompatActivity implements OnRecallMessa
                 .map(e -> {
                     UUID uuid = UUID.randomUUID();
                     LocalDateTime now = LocalDateTime.now();
+//                    LocalDateTime now =LocalDateTime.//.of(2019,6,22,23,30,10);4
                     String text = editText.getText().toString();
                     editText.setText("");
                     return new ClientSendMessage(uuid, now, text);

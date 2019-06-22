@@ -1,6 +1,14 @@
 package nju.androidchat.client.mvp0;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.widget.ImageView;
+
+import java.io.InputStream;
+import java.net.URL;
 import java.util.List;
+
+import javax.net.ssl.HttpsURLConnection;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,6 +19,13 @@ public class Mvp0TalkPresenter implements Mvp0Contract.Presenter {
 
     private Mvp0Contract.Model mvp0TalkModel;
     private Mvp0Contract.View iMvp0TalkView;
+
+    @Override
+    public void loadImage(String path, ImageView imageView) {
+        Thread_loadImage th=new Thread_loadImage(imageView,path);
+        th.start();
+    }
+
 
     @Getter
     private List<ClientMessage> clientMessages;
@@ -46,4 +61,5 @@ public class Mvp0TalkPresenter implements Mvp0Contract.Presenter {
     public void start() {
 
     }
+
 }

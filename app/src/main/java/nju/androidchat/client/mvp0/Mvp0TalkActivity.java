@@ -1,5 +1,6 @@
 package nju.androidchat.client.mvp0;
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -11,6 +12,12 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,18 +33,32 @@ import nju.androidchat.client.component.OnRecallMessageRequested;
 
 @Log
 public class Mvp0TalkActivity extends AppCompatActivity implements Mvp0Contract.View, TextView.OnEditorActionListener, OnRecallMessageRequested {
-    private Mvp0Contract.Presenter presenter;
+    private Mvp0Contract.Presenter presenter ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        initImageLoader(getApplicationContext());
         setContentView(R.layout.activity_main);
-
         Mvp0TalkModel mvp0TalkModel = new Mvp0TalkModel();
-
         // Create the presenter
         this.presenter = new Mvp0TalkPresenter(mvp0TalkModel, this, new ArrayList<>());
         mvp0TalkModel.setIMvp0TalkPresenter(this.presenter);
+    }
+    private void initImageLoader(Context context) {
+        // TODO Auto-generated method stub
+        // 创建DisplayImageOptions对象
+        DisplayImageOptions defaulOptions = new DisplayImageOptions.Builder()
+                .cacheInMemory(true).cacheOnDisk(true).build();
+        // 创建ImageLoaderConfiguration对象
+        ImageLoaderConfiguration configuration = new ImageLoaderConfiguration.Builder(
+                context).defaultDisplayImageOptions(defaulOptions)
+                .threadPriority(Thread.NORM_PRIORITY - 2)
+                .denyCacheImageMultipleSizesInMemory()
+                .diskCacheFileNameGenerator(new Md5FileNameGenerator())
+                .tasksProcessingOrder(QueueProcessingType.LIFO).build();
+        // ImageLoader对象的配置
+        ImageLoader.getInstance().init(configuration);
     }
 
     @Override
@@ -60,6 +81,7 @@ public class Mvp0TalkActivity extends AppCompatActivity implements Mvp0Contract.
                         // 如果是自己发的，增加ItemTextSend
                         if (message.getSenderUsername().equals(this.presenter.getUsername())) {
                             content.addView(new ItemTextSend(this, text, message.getMessageId(), this));
+
                         } else {
                             content.addView(new ItemTextReceive(this, text, message.getMessageId()));
                         }

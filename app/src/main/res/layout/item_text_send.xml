@@ -38,7 +38,12 @@
             android:layout_toStartOf="@id/chat_item_header"
             android:gravity="end|center_vertical"
             android:orientation="horizontal">
-
+            <nju.androidchat.client.mvp0.MyImageView
+                android:id="@+id/chat_item_content_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@android:string/VideoView_error_button"
+                app:srcCompat="@drawable/ic_menu_gallery" />
             <TextView
                 android:id="@+id/chat_item_content_text"
                 android:layout_width="match_parent"

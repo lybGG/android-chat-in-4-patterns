@@ -37,6 +37,10 @@ public class Mvp0TalkModel implements MessageListener, Mvp0Contract.Model {
         return client.getUsername();
     }
 
+
+
+
+
     @Override
     public ClientMessage sendInformation(String message) {
         //处理事件

@@ -1,18 +1,28 @@
 package nju.androidchat.client;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.KeyEvent;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ImageView;
 import android.widget.ScrollView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.Objects;
 import java.util.Properties;
 
+import javax.net.ssl.HttpsURLConnection;
+
 import lombok.experimental.UtilityClass;
 import lombok.extern.java.Log;
+import nju.androidchat.client.mvp0.Mvp0TalkActivity;
 import nju.androidchat.client.mvvm0.Mvvm0TalkActivity;
 
 import static android.content.Context.INPUT_METHOD_SERVICE;
@@ -22,7 +32,7 @@ import static android.content.Context.INPUT_METHOD_SERVICE;
 public class Utils {
     Properties props = new Properties();
     String CHAT_ACTIVITY_KEY = "chat_activity";
-    Class<?> CHAT_ACTIVITY = Mvvm0TalkActivity.class;
+    Class<?> CHAT_ACTIVITY = Mvp0TalkActivity.class;
 
     public void jumpTo(AppCompatActivity activity, Class<?> clazz) {
         Intent intent = new Intent(activity.getBaseContext(), clazz);
@@ -60,5 +70,10 @@ public class Utils {
     public boolean containsBadWords(String content) {
         return content.contains("fuck");
     }
+
+
+
+
+    private ImageView imageView;
 
 }

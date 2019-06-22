@@ -1,5 +1,7 @@
 package nju.androidchat.client.mvp0;
 
+import android.widget.ImageView;
+
 import java.util.List;
 
 import nju.androidchat.client.ClientMessage;
@@ -18,6 +20,8 @@ public interface Mvp0Contract {
 
         //撤回消息mvp0不实现
         void recallMessage(int index0);
+
+        public void loadImage(String path, ImageView imageView);
     }
 
     interface Model {
@@ -25,4 +29,5 @@ public interface Mvp0Contract {
 
         String getUsername();
     }
+
 }

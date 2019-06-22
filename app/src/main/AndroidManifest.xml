@@ -4,6 +4,10 @@
     package="nju.androidchat.client">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+
+<!--     android:name="nju.androidchat.client.AppContext"-->
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -36,6 +40,7 @@
         <activity android:name=".mvvm2.Mvvm2TalkActivity" />
         <activity android:name=".mvvm3.Mvvm3TalkActivity" />
 
-    </application>
+    </application
+   >
 
 </manifest>
